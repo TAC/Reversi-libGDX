@@ -1,1 +1,7 @@
 box: wercker/android
+build:
+  steps:
+    - script:
+        name: show base information
+        code: |
+          gradle -v
