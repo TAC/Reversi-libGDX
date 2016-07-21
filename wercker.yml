@@ -1,4 +1,4 @@
-box: jacekmarchwicki/android
+box: wasabeef/android
 build:
   steps:
     - script:
