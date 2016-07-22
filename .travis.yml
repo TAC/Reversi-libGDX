@@ -2,7 +2,7 @@ language: android
 sudo: false
 env:
   global:
-  - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+  - GRADLE_OPTS="-Xmx1024m -XX:MaxPermSize=1024m"
 android:
   components:
     - build-tools-23.0.1
