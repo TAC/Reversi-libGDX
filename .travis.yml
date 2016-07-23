@@ -11,5 +11,5 @@ android:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
-  script:
-    - ./gradlew assembleDebug test
+script:
+  - ./gradlew assembleDebug
