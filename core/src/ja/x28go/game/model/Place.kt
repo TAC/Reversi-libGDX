@@ -7,8 +7,8 @@ package ja.x28go.game.model
 data class Place(val x: Int, val y: Int, var stone: Stone) {
 
     override fun equals(other: Any?): Boolean {
-        val other = other as? Place ?: return false
-        return x == other.x && y == other.y && stone == other.stone
+        val check = other as? Place ?: return false
+        return x == check.x && y == check.y && stone == check.stone
     }
 
     override fun hashCode(): Int {
