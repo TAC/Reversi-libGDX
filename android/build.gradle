@@ -1,6 +1,11 @@
+def VERSION_CODE = 1
+def VERSION_NAME = "0.0.1"
+def PACKAGE_NAME = "ja.x28go.game"
+
 android {
     buildToolsVersion "23.0.1"
     compileSdkVersion 23
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -15,13 +20,64 @@ android {
         instrumentTest.setRoot('tests')
         main.java.srcDirs += 'src/main/kotlin'
     }
+
     defaultConfig {
-        applicationId "ja.x28go.game"
+        applicationId PACKAGE_NAME
         minSdkVersion 8
         targetSdkVersion 23
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix '-debug'
+        }
+        release {
+            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        debug {
+//            storeFile file("../keystore/debug.keystore")
+        }
+        release {
+//            storeFile file("../keystore/release.keystore")
+//            storePassword "hogehoge"
+//            keyAlias "hogehoge"
+//            keyPassword "hogehoge"
+        }
+    }
+
+    productFlavors {
+        develop {
+            versionName VERSION_NAME + "-develop"
+        }
+        staging {
+            versionName VERSION_NAME + "-staging"
+        }
+        product {
+            versionName VERSION_NAME + "-product"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        def prefix = appName + "-android"
+        if (variant.buildType.name.equals("debug") || variant.buildType.name.equals("release")) {
+            variant.outputs.each { output ->
+                System.println("* output.outputFile.name : ${output.outputFile.name}")
+                if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+                    def newName = "${prefix}_v${versionName}_r${versionCode}.apk"
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                }
+            }
+        }
     }
 }
-
 
 // called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders
@@ -125,11 +181,47 @@ idea {
         }
     }
 }
+
 apply plugin: 'kotlin-android'
 apply plugin: 'deploygate'
+
 repositories {
     mavenCentral()
 }
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+deploygate {
+    def userName
+    def token
+    def localProperties = project.file("../local.properties")
+    if (localProperties.exists()) {
+        Properties properties = new Properties()
+        localProperties.withInputStream { instr ->
+            properties.load(instr)
+        }
+        def deploygateUser = properties.getProperty('deploygate.user')
+        if (deploygateUser) {
+            userName = deploygateUser
+        } else {
+            userName = "$System.env.DEPLOYGATE_USER"
+        }
+        def deploygateToken = properties.getProperty('deploygate.token')
+        if (deploygateToken) {
+            token = deploygateToken
+        } else {
+            token = "$System.env.DEPLOYGATE_TOKEN"
+        }
+    } else {
+        userName = "$System.env.DEPLOYGATE_USER"
+        token = "$System.env.DEPLOYGATE_TOKEN"
+    }
+
+    apks {
+        debug {
+            sourceFile = file("${project.buildDir}/apk/${appName}-android_v${VERSION_NAME}-develop-debug_r${VERSION_CODE}.apk")
+        }
+    }
 }
