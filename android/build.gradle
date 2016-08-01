@@ -194,8 +194,6 @@ dependencies {
 }
 
 deploygate {
-    def userName
-    def token
     def localProperties = project.file("../local.properties")
     if (localProperties.exists()) {
         Properties properties = new Properties()
@@ -206,17 +204,17 @@ deploygate {
         if (deploygateUser) {
             userName = deploygateUser
         } else {
-            userName = "$System.env.DEPLOYGATE_USER"
+            userName = System.getenv("DEPLOYGATE_USER")
         }
         def deploygateToken = properties.getProperty('deploygate.token')
         if (deploygateToken) {
             token = deploygateToken
         } else {
-            token = "$System.env.DEPLOYGATE_TOKEN"
+            token = System.getenv("DEPLOYGATE_TOKEN")
         }
     } else {
-        userName = "$System.env.DEPLOYGATE_USER"
-        token = "$System.env.DEPLOYGATE_TOKEN"
+        userName = System.getenv("DEPLOYGATE_USER")
+        token = System.getenv("DEPLOYGATE_TOKEN")
     }
 
     apks {
