@@ -12,6 +12,7 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 script:
-  - ./gradlew assembleDebug
+  - ./gradlew assembleDevelopDebug
+  - ./gradlew uploadDeployGateDevelopDebug
 notifications:
   slack: 28go:m5tgpxI8qxVLSbTR1Z2bDeT1
