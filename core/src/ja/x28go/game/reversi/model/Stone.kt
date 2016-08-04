@@ -1,4 +1,4 @@
-package ja.x28go.game.model
+package ja.x28go.game.reversi.model
 
 /**
  * status of stone

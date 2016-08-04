@@ -1,22 +1,25 @@
-package ja.x28go.game.screen
+package ja.x28go.game.reversi.screen
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
-import ja.x28go.game.Main
+import ja.x28go.game.reversi.Main
 
 /**
- * board screen
+ * menu screen
  */
 
-class Board(game: Main) : ScreenAdapter(game) {
+class Menu(game: Main) : ScreenAdapter(game) {
 
     lateinit var stage: Stage
     lateinit var batch: SpriteBatch
 
     init {
-        log("board init")
+        log("menu init")
 
         stage = Stage(FitViewport(game.LOGICAL_WIDTH, game.LOGICAL_HEIGHT))
         stage = Stage()
@@ -25,8 +28,17 @@ class Board(game: Main) : ScreenAdapter(game) {
         batch = SpriteBatch()
         batch.projectionMatrix = stage.viewport.camera.combined
 
+        val button = TextButton("START", skin, "default")
+        button.width = 400f
+        button.height = 80f
+        button.setPosition(Gdx.graphics.width / 2 - 200f, Gdx.graphics.height / 2 - 40f)
+        button.addListener(object : ClickListener() {
+            override fun clicked(event: InputEvent, x: Float, y: Float) {
+                button.setText("CLICKED")
+            }
+        })
 
-//        stage.addActor(button)
+        stage.addActor(button)
     }
 
     override fun render(delta: Float) {

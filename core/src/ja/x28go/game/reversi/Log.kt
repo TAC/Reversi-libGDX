@@ -1,4 +1,4 @@
-package ja.x28go.game
+package ja.x28go.game.reversi
 
 import com.badlogic.gdx.Gdx
 

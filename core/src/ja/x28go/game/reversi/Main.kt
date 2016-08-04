@@ -1,8 +1,8 @@
-package ja.x28go.game
+package ja.x28go.game.reversi
 
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Screen
-import ja.x28go.game.screen.Menu
+import ja.x28go.game.reversi.screen.Menu
 
 class Main : Game(), Log {
 

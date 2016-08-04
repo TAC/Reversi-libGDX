@@ -1,6 +1,6 @@
 def VERSION_CODE = 1
 def VERSION_NAME = "0.0.1"
-def PACKAGE_NAME = "ja.x28go.game"
+def PACKAGE_NAME = "ja.x28go.game.reversi"
 
 android {
     buildToolsVersion "23.0.1"
@@ -125,7 +125,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'ja.x28go.game/ja.x28go.game.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'ja.x28go.game/ja.x28go.game.reversi.AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

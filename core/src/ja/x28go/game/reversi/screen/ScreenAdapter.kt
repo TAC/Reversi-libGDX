@@ -1,11 +1,11 @@
-package ja.x28go.game.screen
+package ja.x28go.game.reversi.screen
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import ja.x28go.game.Log
-import ja.x28go.game.Main
+import ja.x28go.game.reversi.Log
+import ja.x28go.game.reversi.Main
 
 /**
  * screen base class
