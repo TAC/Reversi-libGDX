@@ -19,7 +19,6 @@ class Board(game: Main) : ScreenAdapter(game) {
         log("board init")
 
         stage = Stage(FitViewport(game.LOGICAL_WIDTH, game.LOGICAL_HEIGHT))
-        stage = Stage()
         Gdx.input.inputProcessor = stage
 
         batch = SpriteBatch()
