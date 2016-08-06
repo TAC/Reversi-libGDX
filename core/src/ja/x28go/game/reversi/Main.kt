@@ -2,7 +2,7 @@ package ja.x28go.game.reversi
 
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Screen
-import ja.x28go.game.reversi.screen.Menu
+import ja.x28go.game.reversi.screen.Splash
 
 class Main : Game(), Log {
 
@@ -15,7 +15,7 @@ class Main : Game(), Log {
     override fun create() {
         this.log("create")
 
-        setScreen(Menu(this))
+        setScreen(Splash(this))
     }
 
     override fun render() {
