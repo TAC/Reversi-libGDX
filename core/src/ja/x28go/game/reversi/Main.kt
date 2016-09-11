@@ -2,20 +2,20 @@ package ja.x28go.game.reversi
 
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Screen
-import ja.x28go.game.reversi.screen.Splash
+import ja.x28go.game.reversi.screen.Board
 
 class Main : Game(), Log {
 
-    // 4:3
-    var LOGICAL_WIDTH = 256f
-    var LOGICAL_HEIGHT = 192f
+    // 3:4
+    var LOGICAL_WIDTH = 192f
+    var LOGICAL_HEIGHT = 256f
 
     private var nextScreen: Screen? = null
 
     override fun create() {
         this.log("create")
 
-        setScreen(Splash(this))
+        setScreen(Board(this))
     }
 
     override fun render() {

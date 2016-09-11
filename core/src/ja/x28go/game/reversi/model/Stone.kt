@@ -6,7 +6,7 @@ package ja.x28go.game.reversi.model
 
 enum class Stone {
 
-    BLACK, WHITE, NONE;
+    BLACK, WHITE, SELECT, NONE;
 
     fun other() = if (this == BLACK) WHITE else BLACK
 }
