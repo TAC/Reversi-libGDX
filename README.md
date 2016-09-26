@@ -2,6 +2,7 @@ Reversi
 =======
 
 [![Build Status](https://travis-ci.org/TAC/Reversi.svg?branch=master)](https://travis-ci.org/TAC/Reversi)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/TAC/Reversi/blob/master/LICENSE)
 
 To create a Reversi in order to prototype the Android app.
 
@@ -19,10 +20,6 @@ To create the following configuration (planned).
 * Mockito
 * Espresso
 * Firebase
-
-## Licence
-
-[MIT](https://github.com/TAC/Reversi/blob/master/LICENSE)
 
 ## Author
 
