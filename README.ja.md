@@ -20,6 +20,7 @@ Androidアプリを試作するためにオセロを作成する。
 * Mockito
 * Espresso
 * Firebase
+* WebRTC(SkyWay)
 
 ## Author
 

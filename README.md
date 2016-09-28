@@ -20,6 +20,7 @@ To create the following configuration (planned).
 * Mockito
 * Espresso
 * Firebase
+* WebRTC(SkyWay)
 
 ## Author
 
