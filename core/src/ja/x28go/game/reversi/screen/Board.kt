@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
 import ja.x28go.game.reversi.Main
-import ja.x28go.game.reversi.model.MainData
+import ja.x28go.game.reversi.model.BoardData
 import ja.x28go.game.reversi.model.Place
 import ja.x28go.game.reversi.model.Stone
 
@@ -19,7 +19,7 @@ import ja.x28go.game.reversi.model.Stone
 
 class Board(game: Main) : ScreenAdapter(game) {
 
-    lateinit var stage: Stage
+    var stage: Stage
 
     val textureBoard: Texture
     val textureBlack: Texture
@@ -37,7 +37,7 @@ class Board(game: Main) : ScreenAdapter(game) {
     val SELECT_WIDTH   = 19.2f
     val SELECT_HEIGHT  = 19.2f
 
-    private val data: MainData = MainData()
+    private val data: BoardData = BoardData()
 
     var currentPlayer = Stone.BLACK
 
@@ -114,8 +114,7 @@ class Board(game: Main) : ScreenAdapter(game) {
         val image = when (place.stone) {
             Stone.BLACK -> Image(textureBlack)
             Stone.WHITE -> Image(textureWhite)
-            Stone.SELECT -> throw IllegalArgumentException()
-            Stone.NONE -> throw IllegalArgumentException()
+            else -> throw IllegalArgumentException()
         }
 
         // 置かれている石を置き換える
@@ -191,7 +190,13 @@ class Board(game: Main) : ScreenAdapter(game) {
         if (data.isGameOver()) {
             val blackCount = data.countStones(Stone.BLACK)
             val whiteCount = data.countStones(Stone.WHITE)
-            labelStatus.setText("GAME END")
+            if (blackCount > whiteCount) {
+                labelStatus.setText("BLACK WIN")
+            } else if (blackCount < whiteCount) {
+                labelStatus.setText("WHITE WIN")
+            } else {
+                labelStatus.setText("DRAW")
+            }
             return
         }
 
@@ -221,8 +226,7 @@ class Board(game: Main) : ScreenAdapter(game) {
         labelStatus.setText(when (currentPlayer) {
             Stone.BLACK -> "TURN IS BLACK"
             Stone.WHITE -> "TURN IS WHITE"
-            Stone.SELECT -> throw IllegalArgumentException()
-            Stone.NONE -> throw IllegalArgumentException()
+            else -> throw IllegalArgumentException()
         })
     }
 }

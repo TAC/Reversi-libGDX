@@ -4,7 +4,7 @@ package ja.x28go.game.reversi.model
  * Game main data
  */
 
-class MainData() {
+class BoardData() {
 
     // const value
     val BOARD_SIZE = 8  // board size X x X
