@@ -1,6 +1,7 @@
 buildscript {
     ext.kotlin_version = '1.0.4'
     repositories {
+        jcenter()
         mavenLocal()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
