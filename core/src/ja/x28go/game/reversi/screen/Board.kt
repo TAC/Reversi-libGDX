@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import ja.x28go.game.reversi.Main
 import ja.x28go.game.reversi.model.BoardData
 import ja.x28go.game.reversi.model.Place
+import ja.x28go.game.reversi.model.Player
 import ja.x28go.game.reversi.model.Stone
+import ja.x28go.game.reversi.model.Strategy.Weak
 
 /**
  * board screen
@@ -29,8 +31,8 @@ class Board(game: Main) : ScreenAdapter(game) {
 
     val BOARD_START_X = 20.0f
     val BOARD_START_Y = 204.0f
-    val SQUARE_WIDTH   = 19.2f
-    val SQUARE_HEIGHT  = 19.1f
+    val SQUARE_WIDTH  = 19.2f
+    val SQUARE_HEIGHT = 19.1f
 
     val SELECT_START_X = 19.1f
     val SELECT_START_Y = 203.4f
@@ -40,6 +42,9 @@ class Board(game: Main) : ScreenAdapter(game) {
     private val data: BoardData = BoardData()
 
     var currentPlayer = Stone.BLACK
+
+    var playerOwn: Player
+    var playerOther: Player
 
     init {
         log("board init")
@@ -58,6 +63,11 @@ class Board(game: Main) : ScreenAdapter(game) {
         imageBoard.setScale(0.4f, 0.4f)
         imageBoard.setPosition(0f, 50f)
         stage.addActor(imageBoard)
+
+        // プレイヤーの設定
+//        playerOwn = Player(1, "You", 0, 0, currentPlayer.random())
+        playerOwn = Player(1, "You", 0, 0, currentPlayer)
+        playerOther = Player(2, "Enemy", 0, 0, playerOwn.stone.other(), Weak())
 
         // 石の初期表示
         data.getInitialPlaces().forEach { putStone(it) }
@@ -143,12 +153,14 @@ class Board(game: Main) : ScreenAdapter(game) {
         image.setScale(0.4f, 0.4f)
         setSelectPosition(image, place.x, place.y)
 
-        // クリックイベントの設定
-        image.addListener(object : ClickListener() {
-            override fun clicked(event: InputEvent, x: Float, y: Float) {
-                onClickPlace(place.x, place.y)
-            }
-        })
+        if (playerOwn.stone == currentPlayer) {
+            // クリックイベントの設定
+            image.addListener(object : ClickListener() {
+                override fun clicked(event: InputEvent, x: Float, y: Float) {
+                    onClickPlace(place)
+                }
+            })
+        }
 
         stage.addActor(image)
 
@@ -169,9 +181,9 @@ class Board(game: Main) : ScreenAdapter(game) {
         select.setPosition(posX, posY)
     }
 
-    fun onClickPlace(x: Int, y: Int) {
-        log("onClickPlace - x:" + x.toString() + " y:" + y.toString())
-        val clickPlace = Place(x, y, currentPlayer)
+    fun onClickPlace(place: Place) {
+        log("onClickPlace - x:" + place.x.toString() + " y:" + place.y.toString())
+        val clickPlace = Place(place.x, place.y, currentPlayer)
         if (!data.canPut(clickPlace)) {
             log("onClickPlace - canPut:false")
             return
@@ -211,6 +223,11 @@ class Board(game: Main) : ScreenAdapter(game) {
             clearAllSelectPlaces()
             changePlayer()
             data.getAllCanPutPlaces(currentPlayer).forEach { setSelect(it) }
+        }
+
+        // 相手の処理
+        if (playerOther.stone == currentPlayer) {
+            onClickPlace(playerOther.strategy.computeNext(data, playerOther.stone))
         }
     }
 
