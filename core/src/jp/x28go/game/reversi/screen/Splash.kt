@@ -1,41 +1,38 @@
-package ja.x28go.game.reversi.screen
+package jp.x28go.game.reversi.screen
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
-import ja.x28go.game.reversi.Main
+import jp.x28go.game.reversi.Main
 
 /**
- * menu screen
+ * splash screen
  */
 
-class Menu(game: Main) : ScreenAdapter(game) {
+class Splash(game: Main) : ScreenAdapter(game) {
 
     var stage: Stage
 
     init {
-        log("menu init")
+        log("board init")
 
         stage = Stage(FitViewport(game.LOGICAL_WIDTH, game.LOGICAL_HEIGHT))
         Gdx.input.inputProcessor = stage
 
-        val button = TextButton("START", skin, "default")
-//        button.width = 400f
-//        button.height = 80f
-        log("width : " + Gdx.graphics.width.toString())
-        log("height : " + Gdx.graphics.height.toString())
-//        button.setPosition(Gdx.graphics.width / 2f, Gdx.graphics.height / 2f)
-        button.setPosition(70f, 0f)
-        button.addListener(object : ClickListener() {
+        // スプラッシュ画像
+        var texture = Texture(Gdx.files.internal("image/splash.png"))
+        var image = Image(texture)
+        image.addListener(object : ClickListener() {
             override fun clicked(event: InputEvent, x: Float, y: Float) {
-                game.setNextScreen(Board(game))
+                game.setNextScreen(Menu(game))
             }
         })
 
-        stage.addActor(button)
+        stage.addActor(image)
     }
 
     override fun render(delta: Float) {

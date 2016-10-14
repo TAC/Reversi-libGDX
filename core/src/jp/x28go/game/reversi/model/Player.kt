@@ -1,6 +1,6 @@
-package ja.x28go.game.reversi.model
+package jp.x28go.game.reversi.model
 
-import ja.x28go.game.reversi.model.Strategy.None
+import jp.x28go.game.reversi.model.Strategy.None
 
 /**
  * Player Data

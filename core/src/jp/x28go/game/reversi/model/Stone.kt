@@ -1,4 +1,4 @@
-package ja.x28go.game.reversi.model
+package jp.x28go.game.reversi.model
 
 import java.util.*
 

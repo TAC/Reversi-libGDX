@@ -1,4 +1,4 @@
-package ja.x28go.game.reversi.screen
+package jp.x28go.game.reversi.screen
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
@@ -8,18 +8,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
-import ja.x28go.game.reversi.Main
-import ja.x28go.game.reversi.model.BoardData
-import ja.x28go.game.reversi.model.Place
-import ja.x28go.game.reversi.model.Player
-import ja.x28go.game.reversi.model.Stone
-import ja.x28go.game.reversi.model.Strategy.Weak
+import jp.x28go.game.reversi.Main
+import jp.x28go.game.reversi.model.BoardData
+import jp.x28go.game.reversi.model.Place
+import jp.x28go.game.reversi.model.Player
+import jp.x28go.game.reversi.model.Stone
+import jp.x28go.game.reversi.model.Strategy.Weak
 
 /**
  * board screen
  */
 
-class Board(game: Main) : ScreenAdapter(game) {
+class Board(game: Main) : jp.x28go.game.reversi.screen.ScreenAdapter(game) {
 
     var stage: Stage
 

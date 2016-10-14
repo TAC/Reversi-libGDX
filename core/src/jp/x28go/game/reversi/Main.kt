@@ -1,8 +1,8 @@
-package ja.x28go.game.reversi
+package jp.x28go.game.reversi
 
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Screen
-import ja.x28go.game.reversi.screen.Splash
+import jp.x28go.game.reversi.screen.Splash
 
 class Main : Game(), Log {
 

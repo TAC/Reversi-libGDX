@@ -1,9 +1,9 @@
-package ja.x28go.game.reversi.model.Strategy
+package jp.x28go.game.reversi.model.Strategy
 
-import ja.x28go.game.reversi.model.BoardData
-import ja.x28go.game.reversi.model.Cpu
-import ja.x28go.game.reversi.model.Place
-import ja.x28go.game.reversi.model.Stone
+import jp.x28go.game.reversi.model.BoardData
+import jp.x28go.game.reversi.model.Cpu
+import jp.x28go.game.reversi.model.Place
+import jp.x28go.game.reversi.model.Stone
 
 /**
  * CPU weak

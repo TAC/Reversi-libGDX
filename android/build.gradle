@@ -1,6 +1,6 @@
 def VERSION_CODE = 1
 def VERSION_NAME = "0.0.1"
-def PACKAGE_NAME = "ja.x28go.game.reversi"
+def PACKAGE_NAME = "jp.x28go.game.reversi"
 
 android {
     buildToolsVersion "23.0.1"
@@ -125,7 +125,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'ja.x28go.game/ja.x28go.game.reversi.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'jp.x28go.game/jp.x28go.game.reversi.AndroidLauncher'
 }
 
 apply plugin: 'kotlin-android'
