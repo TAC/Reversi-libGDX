@@ -3,7 +3,7 @@ def VERSION_NAME = "0.0.1"
 def PACKAGE_NAME = "jp.x28go.game.reversi"
 
 android {
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
     compileSdkVersion 23
 
     sourceSets {
@@ -27,6 +27,30 @@ android {
         targetSdkVersion 23
         versionCode VERSION_CODE
         versionName VERSION_NAME
+
+        // setting BuildConfig
+        def skyway_key = ""
+        def skyway_domain = ""
+        def keysProperties = project.file("../keys.properties")
+        if (keysProperties.exists()) {
+            Properties properties = new Properties()
+            keysProperties.withInputStream { instr ->
+                properties.load(instr)
+            }
+            skyway_key = properties.getProperty('skyway.key')
+            if (skyway_key == null) {
+                skyway_key = System.getenv("SKYWAY_KEY")
+            }
+            skyway_domain = properties.getProperty('skyway.domain')
+            if (skyway_domain == null) {
+                skyway_domain = System.getenv("SKYWAY_DOMAIN")
+            }
+        } else {
+            skyway_key = System.getenv("SKYWAY_KEY")
+            skyway_domain = System.getenv("SKYWAY_DOMAIN")
+        }
+        buildConfigField("String", "SKYWAY_KEY", "\"${skyway_key}\"")
+        buildConfigField("String", "SKYWAY_DOMAIN", "\"${skyway_domain}\"")
     }
 
     buildTypes {
@@ -133,11 +157,17 @@ apply plugin: 'deploygate'
 
 repositories {
     jcenter()
+    flatDir {
+        dirs 'libs'
+    }
 //    mavenCentral()
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile (name:'SkyWay',ext:'aar')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
 }
 
 deploygate {

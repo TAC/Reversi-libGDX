@@ -2,9 +2,9 @@ package jp.x28go.game.reversi
 
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.Screen
-import jp.x28go.game.reversi.screen.Splash
+import jp.x28go.game.reversi.screen.Menu
 
-class Main : Game(), Log {
+class Main(dataConnection: SkyWayDataConnectionInterface) : Game(), Log {
 
     // 3:4
     var LOGICAL_WIDTH = 192f
@@ -12,10 +12,17 @@ class Main : Game(), Log {
 
     private var nextScreen: Screen? = null
 
+    var _dataConnection: SkyWayDataConnectionInterface
+
+    init {
+        _dataConnection = dataConnection
+    }
+
     override fun create() {
         this.log("create")
 
-        setScreen(Splash(this))
+//        setScreen(Splash(this))
+        setScreen(Menu(this))
     }
 
     override fun render() {
@@ -34,6 +41,7 @@ class Main : Game(), Log {
     override fun dispose() {
         this.log("dispose")
         super.dispose()
+        _dataConnection.destroyPeer()
     }
 
     fun setNextScreen(screen: Screen) {
