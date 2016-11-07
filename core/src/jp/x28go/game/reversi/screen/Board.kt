@@ -21,8 +21,6 @@ import jp.x28go.game.reversi.model.Strategy.Weak
 
 class Board(game: Main) : jp.x28go.game.reversi.screen.ScreenAdapter(game) {
 
-    var stage: Stage
-
     val textureBoard: Texture
     val textureBlack: Texture
     val textureWhite: Texture
@@ -79,38 +77,6 @@ class Board(game: Main) : jp.x28go.game.reversi.screen.ScreenAdapter(game) {
         labelStatus = Label("TURN IS BLACK", skin, "default")
         labelStatus.setPosition(0f, 0f)
         stage.addActor(labelStatus)
-    }
-
-    override fun render(delta: Float) {
-        super.render(delta)
-
-        update(delta)
-        draw(delta)
-    }
-
-    override fun resize(width: Int, height: Int) {
-        super.resize(width, height)
-        stage.viewport.update(width, height, true)
-    }
-
-    override fun show() {
-        super.show()
-    }
-
-    override fun hide() {
-        super.hide()
-    }
-
-    override fun pause() {
-        super.pause()
-    }
-
-    override fun resume() {
-        super.resume()
-    }
-
-    override fun dispose() {
-        super.dispose()
     }
 
     override fun update(delta: Float) {

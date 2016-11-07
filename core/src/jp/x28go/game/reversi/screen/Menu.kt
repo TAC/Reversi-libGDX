@@ -16,8 +16,6 @@ import jp.x28go.game.reversi.Main
 
 class Menu(game: Main) :ScreenAdapter(game) {
 
-    var stage: Stage
-
     init {
         log("menu init")
 
@@ -92,38 +90,6 @@ class Menu(game: Main) :ScreenAdapter(game) {
         stage.addActor(inputOtherPeerId)
         stage.addActor(inputMessage)
         stage.addActor(labelMessage)
-    }
-
-    override fun render(delta: Float) {
-        super.render(delta)
-
-        update(delta)
-        draw(delta)
-    }
-
-    override fun resize(width: Int, height: Int) {
-        super.resize(width, height)
-        stage.viewport.update(width, height, true)
-    }
-
-    override fun show() {
-        super.show()
-    }
-
-    override fun hide() {
-        super.hide()
-    }
-
-    override fun pause() {
-        super.pause()
-    }
-
-    override fun resume() {
-        super.resume()
-    }
-
-    override fun dispose() {
-        super.dispose()
     }
 
     override fun update(delta: Float) {
